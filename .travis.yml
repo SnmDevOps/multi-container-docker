@@ -22,3 +22,17 @@ after_success:
   - docker push snmmaurya/multi-nginx
   - docker push snmmaurya/multi-server
   - docker push snmmaurya/multi-worker
+
+
+deploy:
+  provider: elastickbeanstalk
+  region: ap-south-1
+  app: docker-service
+  env: docker-service-1
+  bucket_name: elastickbeanstalk-ap-south-1-30909809808
+  docker_path: docker-multi
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key:
+    secure: $AWS_SECRET_KEY
